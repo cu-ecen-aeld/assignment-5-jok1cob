@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case "$1" in
+  start)
+       /etc/init.d/scull_load
+       /etc/init.d/module_load faulty
+        modprobe hello.ko
+        ;;
+   stop)
+        rmmod hello.ko
+        /etc/init.d/module_unload faulty
+        /etc/init.d/scull_unload
+        ;;
+      *)
+        echo "Usage: "$1" {start|stop}"
+        exit 1
+esac
+
+exit 0
